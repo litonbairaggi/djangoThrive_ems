@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+{% block title %}Add Team{% endblock title %}}
+{% block body %}
+{% load static %}
+
+
+<div class="container">
+	<div class="card card-1">
+		<div class="card-heading"></div>
+		<div class="card-body">
+			<h2 class="title">Add New Team</h2>
+			<form method="POST" class="post-form" action="/create_tem">
+					{% csrf_token %} 
+				
+				
+				<div class="">
+                    {{ form.eid }}
+				</div>
+				<br>
+					<div class="">
+                        {{ form.ename }} 
+				</div>
+					<br>
+						<div class="">
+				      {{ form.eemail }}  
+                </div>
+						<br>
+							<div class="">
+                        {{ form.econtact }}  
+                    </div>
+							<br>
+								<div class="form-group row">									
+									<div class="col-sm-12">
+										<button class="btn btn--radius btn--green" type="submit">Submit</button>
+										<button type="button" class="btn btn-secondary">Cancel</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			
+{% endblock body %}
