@@ -1,32 +1,54 @@
-from django.shortcuts import render
-
-
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
-from django.http.response import HttpResponse
-from django.views import View
 from django.contrib import messages
 
-
+from . models import Team
+from . froms import TeamForm
 # Create your views here.
 
-from django.views.generic import (
-    CreateView,
-)
+def createTeam(request):
+    if request.method == "POST":
+        form = TeamForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect(('/ems/show_team'))
+            except:
+                pass
 
-from .models import (
-    Team
-) 
-from . froms import (
-    TeamForm
-)
+    else:
+        form = TeamForm()   
+    context = {
+        'form': form
+    }    
+    return render(request, 'ems/create_team.html', context)    
 
-class TeamCreateView(CreateView):
-    model = Team
-    form_class = TeamForm
-    template_name = 'ems/create_team.html' 
-    def form_invalid(self, form):
-        form.instance.user = self.request.user   
-        return super().form_invalid(form)
-    def get_success_url(self):
-        return reverse_lazy('store:create_supplier')
+def showTeam(request):
+    teams = Team.objects.all()
+    context = {
+        'teams': teams
+    } 
+    return render(request, 'ems/show_team.html', context)
+
+
+def editTeam(request, id):
+    teams = Team.objects.get(id=id)
+    context = {
+        'teams': teams
+    }
+    return render(request,'ems/edit_team.html', context)
+
+def updateTeam(request, id):
+    teams = Team.objects.get(id=id)
+    form = TeamForm(request.POST, instance=teams)
+    if form.is_valid():
+        form.save()
+        return redirect("/ems/show_team/")
+    context = {
+        'teams': teams
+    }    
+    return render(request, 'ems/edit_team.html', context) 
+
+def destroy(request, id):
+    teams = Team.objects.get(id=id)
+    teams.delete()
+    return redirect("/ems/show_team")

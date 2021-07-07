@@ -1,8 +1,7 @@
 {% extends 'base/base.html' %}
-{% block title %}Add Team{% endblock title %}}
+{% block title %}Update Team{% endblock title %}}
 {% block body %}
 {% load static %}
-
 
 <!-- start: Content -->
 <div id="content" class="span10">
@@ -14,8 +13,8 @@
 		</li>
 		<li>
 			<i class="icon-edit"></i>
-			<a href="#">Team</a>
-		</li> 
+			<a href="#">Forms</a>
+		</li>
 	</ul>
 	<div class="row-fluid sortable">
 		<div class="box span12">
@@ -26,19 +25,19 @@
 				
 				</h2>
 				<div class="box-icon">
-				    <a href="/ems/show_team/" class="btn btn-primary teamlist">Team List</a>
+                    <a href="/ems/show_team/" class="btn btn-primary teamlist">Team List</a>
 					<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
 					<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
 					<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
 				</div>
 			</div>
 			<div class="box-content">
-				<form method="POST" class="form-horizontal" action="/ems/create_team/">
+				<form method="POST" class="form-horizontal" action="/ems/update_team/{{teams.id}}/">
 				{% csrf_token %} 
 					<div class="control-group">
 						<label class="control-label" for="name">Team name </label>
 						<div class="controls">
-						{{form.name}}
+                        <input type="text" name="name" class="span6 typeahead" id="name" value="{{ teams.name }}">
 						</div>
 					</div>
 						<div class="form-actions">
