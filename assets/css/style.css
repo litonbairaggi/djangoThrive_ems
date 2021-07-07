@@ -819,7 +819,7 @@ ul.messages li .message {
 }
 
 .box-header {
-	height: 16px;
+	height: 20px;
 	font-size: 16px;
 	line-height: 16px;
   	padding: 10px;
@@ -2973,3 +2973,30 @@ ul.messagesList li span.date {
 	}
     
 }
+
+
+
+/* Liton */
+.breadcrumb {
+    padding: 6px 15px !important;
+	background: #080808;
+    color: #fff;
+}
+.breadcrumb a{
+	color:#fff;
+}
+li.right{
+	float: right;
+    margin-top: -5px;
+}
+li.right a {
+    color: #fff;
+}
+a.btn.btn-primary.teamlist {
+    padding: 5px 15px;
+    margin-top: -8px;
+}
+
+
+
+

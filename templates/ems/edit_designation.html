@@ -1,5 +1,5 @@
 {% extends 'base/base.html' %}
-{% block title %}Update Team{% endblock title %}}
+{% block title %}Update Designation{% endblock title %}}
 {% block body %}
 {% load static %}
 
@@ -21,23 +21,23 @@
 			<div class="box-header" data-original-title>
 				<h2>
 					<i class="halflings-icon edit"></i>
-					<span class="break"></span>Add team
+					<span class="break"></span>Add Designation
 				
 				</h2>
 				<div class="box-icon">
-                    <a href="/ems/show_team/" class="btn btn-primary teamlist">Team List</a>
+                    <a href="/ems/show_designation/" class="btn btn-primary teamlist">Designation List</a>
 					<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
 					<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
 					<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
 				</div>
 			</div>
 			<div class="box-content">
-				<form method="POST" class="form-horizontal" action="/ems/update_team/{{teams.id}}/">
+				<form method="POST" class="form-horizontal" action="/ems/update_designation/{{designations.id}}/">
 				{% csrf_token %} 
 					<div class="control-group">
-						<label class="control-label" for="team_name">Team name </label>
+						<label class="control-label" for="designation_name">Designation name </label>
 						<div class="controls">
-                        <input type="text" name="team_name" class="span6 typeahead" id="team_name" value="{{ teams.team_name }}">
+                        <input type="text" name="designation_name" class="span6 typeahead" id="designation_name" value="{{ designations.designation_name }}">
 						</div>
 					</div>
 						<div class="form-actions">

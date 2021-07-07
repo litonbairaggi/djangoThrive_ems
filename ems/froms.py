@@ -1,7 +1,8 @@
 from django import forms
-from django.forms import widgets
+from django.db.models.base import Model
+from django.forms import fields, widgets
 
-from . models import Team
+from . models import Team, Designation
 
 class TeamForm(forms.ModelForm):  
     class Meta:  
@@ -9,5 +10,14 @@ class TeamForm(forms.ModelForm):
         fields = "__all__" 
          
         widgets={
-            'name':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Team Name'}),
+            'team_name':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Team Name'}),
+        }
+
+class DesignationForm(forms.ModelForm):
+    class Meta:
+        model = Designation
+        fields = ['id', 'designation_name']
+
+        widgets = {
+            'designation_name':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Designation Name'}),
         }
