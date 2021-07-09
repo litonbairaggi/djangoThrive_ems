@@ -1,0 +1,101 @@
+{% extends 'base/base.html' %}
+{% block title %}Add Employee{% endblock title %}}
+{% block body %}
+{% load static %}
+
+
+<!-- start: Content -->
+<div id="content" class="span10">
+	<ul class="breadcrumb">
+		<li>
+			<i class="icon-home"></i>
+			<a href="index.html">Home</a>
+			<i class="icon-angle-right"></i>
+		</li>
+		<li>
+			<i class="icon-edit"></i>
+			<a href="#">Employee</a>
+		</li> 
+	</ul>
+	<div class="row-fluid sortable">
+		<div class="box span12">
+			<div class="box-header" data-original-title>
+				<h2>
+					<i class="halflings-icon edit"></i>
+					<span class="break"></span>Add Employee
+				
+				</h2>
+				<div class="box-icon">
+				    <a href="/ems/show_employee/" class="btn btn-primary teamlist">Employee List</a>
+					<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+					<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+					<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+				</div>
+			</div>
+			<div class="box-content">
+				<form method="POST" class="form-horizontal" action="/ems/create_employee/">
+				{% csrf_token %} 
+					<div class="control-group">
+						<label class="control-label" for="employee_name">Employee Name </label>
+						<div class="controls">
+						{{form.employee_name}}
+						</div>
+					</div>
+
+					<div class="control-group">
+						<label class="control-label" for="employee_email">Employee Email </label>
+						<div class="controls">
+						{{form.employee_email}}
+						</div>
+					</div>
+
+					<div class="control-group">
+						<label class="control-label" for="team">Employee Team </label>
+						<div class="controls">
+						{{form.team}}
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="designation">Employee Designation</label>
+						<div class="controls">
+						{{form.designation}}
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="employee_phone">Employee Phone</label>
+						<div class="controls">
+						{{form.employee_phone}}
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="gender">Gender</label>
+						<div class="controls">
+						{{form.gender}}
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="address">Employee Address</label>
+						<div class="controls">
+						{{form.address}}
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="salary">Salary</label>
+						<div class="controls">
+						{{form.salary}}
+						</div>
+					</div>
+
+						<div class="form-actions">
+							<button type="submit" class="btn btn-primary">Save changes</button>
+							<button type="reset" class="btn">Cancel</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!--/span-->
+	</div>
+	<!--/row-->
+</div>			
+{% endblock body %}
