@@ -34,7 +34,7 @@
 				</div>
 			</div>
 			<div class="box-content">
-				<form method="POST" class="form-horizontal" action="/ems/create_employee/">
+				<form method="POST" class="form-horizontal">
 				{% csrf_token %} 
 				{{form | crispy}}
 						<div class="form-actions">

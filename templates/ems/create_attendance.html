@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% block title %}Add Attendance{% endblock title %}}
+{% load crispy_forms_tags %}
 {% block body %}
 {% load static %}
 
@@ -33,29 +34,9 @@
 				</div>
 			</div>
 			<div class="box-content">
-				<form method="POST" class="form-horizontal" action="/ems/create_attendance/">
+				<form method="POST" class="form-horizontal">
 				{% csrf_token %} 
-					<div class="control-group">
-						<label class="control-label" for="employee">Employee Name </label>
-						<div class="controls">
-						{{form.employee}}
-						</div>
-					</div>
-                   
-					<div class="control-group">
-						<label class="control-label" for="created_entry">Entry Date </label>
-						<div class="controls">
-						{{form.created_entry}}
-						</div>
-					</div>
-
-					<div class="control-group">
-						<label class="control-label" for="created_exit">Exit Date </label>
-						<div class="controls">
-						{{form.created_exit}}
-						</div>
-					</div>
-
+				{{form | crispy}}
 						<div class="form-actions">
 							<button type="submit" class="btn btn-primary">Save changes</button>
 							<button type="reset" class="btn">Cancel</button>

@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% block title %}Add Designation{% endblock title %}}
+{% load crispy_forms_tags %}
 {% block body %}
 {% load static %}
 
@@ -33,14 +34,9 @@
 				</div>
 			</div>
 			<div class="box-content">
-				<form method="POST" class="form-horizontal" action="/ems/create_designation/">
+				<form method="POST" class="form-horizontal">
 				    {% csrf_token %} 
-					<div class="control-group">
-						<label class="control-label" for="designation_name">Designation </label>
-						<div class="controls">
-						     {{form.designation_name}}
-						</div>
-					</div>
+					{{form | crispy}} 
 						<div class="form-actions">
 							<button type="submit" class="btn btn-primary">Save changes</button>
 							<button type="reset" class="btn">Cancel</button>

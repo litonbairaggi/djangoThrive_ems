@@ -44,17 +44,17 @@
                         <td>{{ payroll.id }}</td>
                         <td>{{ payroll.payroll_employee }}</td>                    
                         <td>{{ payroll.bank_name }}</td>                    
-                        <td>{{ payroll.account_no }}</td>                                                     
+                        <td>{{ payroll.account_no }}</td>                    
 
                      <td class="center">
                         <span class="label label-success">Active</span>
                      </td>
                      <td class="center">
-                        <a class="btn btn-info" href="/ems/edit_payroll/{{payroll.id}}/">
+                        <a class="btn btn-info" href="/ems/update_payroll/{{payroll.pk}}/">
                         <i class="halflings-icon white edit"></i>  
                         </a>
 
-                        <a class="btn btn-danger" href="/ems/delete_payroll/{{payroll.id}}/" onclick="return confirm('Are you sure you want to delete this item?');">
+                        <a class="btn btn-danger" href="/ems/delete_payroll/{{payroll.pk}}/" onclick="return confirm('Are you sure you want to delete this item?');">
 
                         <i class="halflings-icon white trash"></i> 
                         </a>

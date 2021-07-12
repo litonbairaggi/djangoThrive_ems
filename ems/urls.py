@@ -13,34 +13,32 @@ from .views import (
     TeamCreateView,
     TeamListView,
     TeamEditView,
-    
     destroy,
 
-    createDesignation,
-    showDesignation,
-    editDesignation,
-    updateDesignation,
+    DesignationCreateView,
+    DesignationListView,
+    DesignationEditView,
     destroyDesignation,
 
-    createEmployee,
-    showEmployee,
-    editEmployee,
-    updateEmployee,
+    EmployeeCreateView,
+    EmployeeListView,
+    EmployeeEditView,
     destroyEmployee,
 
-    createAttendance,
-    showAttendance,
+    AttendanceCreateView,
+    AttendanceListView,
 
-    createPayroll,
-    showPayroll,
-    editPayroll,
-    updatePayroll,
+    PayrollCreateView,
+    PayrollListView,
+    PayrollEditView,
     destroyPayroll,
+
 )
 
 app_name="ems"
 urlpatterns = [
-
+    
+    
     path('register/', registerPage, name='register'),
 	path('login/', loginPage, name='login'),  
 	path('logout/', logoutUser, name="logout"),
@@ -51,27 +49,23 @@ urlpatterns = [
 
     path('delete_team/<int:id>/', destroy, name='delete_team'),
 
-
-
-    path('create_designation/', createDesignation, name='create_designation'),
-    path('show_designation/', showDesignation, name='show_designation'),
-    path('edit_designation/<int:id>/', editDesignation, name='edit_designation'),
-    path('update_designation/<int:id>/', updateDesignation, name='update_designation'),
+    path('create_designation/', DesignationCreateView.as_view(), name='create_designation'),
+    path('show_designation/', DesignationListView.as_view(), name='show_designation'),
+    path('update_designation/<int:pk>/', DesignationEditView.as_view(), name='update_designation'),
     path('delete_designation/<int:id>/', destroyDesignation, name='delete_designation'),
-    
-    path('create_employee/', createEmployee, name='create_employee'),
-    path('show_employee/', showEmployee, name='show_employee'),
-    path('edit_employee/<int:id>/', editEmployee, name='edit_employee'),
-    path('update_employee/<int:id>/', updateEmployee, name='update_employee'),
+
+    path('create_employee/', EmployeeCreateView.as_view(), name='create_employee'),
+    path('show_employee/', EmployeeListView.as_view(), name='show_employee'),
+    path('update_employee/<int:pk>/', EmployeeEditView.as_view(), name='update_employee'),
     path('delete_employee/<int:id>/', destroyEmployee, name='delete_employee'),
 
-    path('create_attendance/', createAttendance, name='create_attendance'),
-    path('show_attendance/', showAttendance, name='show_attendance'),
+    path('create_attendance/', AttendanceCreateView.as_view(), name='create_attendance'),
+    path('show_attendance/', AttendanceListView.as_view(), name='show_attendance'),
 
-    path('create_payroll/', createPayroll, name='create_payroll'),
-    path('show_payroll/', showPayroll, name='show_payroll'),
-    path('edit_payroll/<int:id>/', editPayroll, name='edit_payroll'),
-    path('update_payroll/<int:id>/', updatePayroll, name='update_payroll'),
+    path('create_payroll/', PayrollCreateView.as_view(), name='create_payroll'),
+    path('show_payroll/', PayrollListView.as_view(), name='show_payroll'),
+    path('update_payroll/<int:pk>/', PayrollEditView.as_view(), name='update_payroll'),
     path('delete_payroll/<int:id>/', destroyPayroll, name='delete_payroll'),
+
     
 ]
