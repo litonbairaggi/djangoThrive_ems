@@ -3,7 +3,16 @@ from django.db import models
 from django.db.models.base import Model
 from django.forms import fields, widgets
 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 from . models import Team, Designation, Employee, Attendance, Payroll
+
+
+class CreateUserForm(UserCreationForm):
+	class Meta:
+		model = User
+		fields = ['username', 'email', 'password1', 'password2']  
 
 class TeamForm(forms.ModelForm):  
     class Meta:  
@@ -38,16 +47,16 @@ class EmployeeForm(forms.ModelForm):
             'address':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Address'}),
             'salary':forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Salary'})
         }
-        # labels={
-        #     'employee_name':'Employee Name',
-        #     'employee_email':'Employee Email',
-        #     'team':'Employee Team',
-        #     'designation':'Employee Designation',
-        #     'employee_phone':'Employee Phone',
-        #     'gender':'Gender',
-        #     'address':'Employee Address',
-        #     'salary':'Salary',
-        # }
+        labels={
+            'employee_name':'Employee Name name',
+            'employee_email':'Employee Email',
+            'team':'Employee Team',
+            'designation':'Employee Designation',
+            'employee_phone':'Employee Phone',
+            'gender':'Gender',
+            'address':'Employee Address',
+            'salary':'Salary',
+        }
 
 
 class AttendanceForm(forms.ModelForm):
@@ -69,3 +78,6 @@ class PayrollForm(forms.ModelForm):
             'bank_name':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Bank Name'}),
             'account_no':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Account No'}),
         }
+
+
+      

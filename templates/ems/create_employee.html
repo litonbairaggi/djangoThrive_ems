@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% block title %}Add Employee{% endblock title %}}
+{% load crispy_forms_tags %}
 {% block body %}
 {% load static %}
 
@@ -35,57 +36,7 @@
 			<div class="box-content">
 				<form method="POST" class="form-horizontal" action="/ems/create_employee/">
 				{% csrf_token %} 
-					<div class="control-group">
-						<label class="control-label" for="employee_name">Employee Name </label>
-						<div class="controls">
-						{{form.employee_name}}
-						</div>
-					</div>
-
-					<div class="control-group">
-						<label class="control-label" for="employee_email">Employee Email </label>
-						<div class="controls">
-						{{form.employee_email}}
-						</div>
-					</div>
-
-					<div class="control-group">
-						<label class="control-label" for="team">Employee Team </label>
-						<div class="controls">
-						{{form.team}}
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="designation">Employee Designation</label>
-						<div class="controls">
-						{{form.designation}}
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="employee_phone">Employee Phone</label>
-						<div class="controls">
-						{{form.employee_phone}}
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="gender">Gender</label>
-						<div class="controls">
-						{{form.gender}}
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="address">Employee Address</label>
-						<div class="controls">
-						{{form.address}}
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="salary">Salary</label>
-						<div class="controls">
-						{{form.salary}}
-						</div>
-					</div>
-
+				{{form | crispy}}
 						<div class="form-actions">
 							<button type="submit" class="btn btn-primary">Save changes</button>
 							<button type="reset" class="btn">Cancel</button>

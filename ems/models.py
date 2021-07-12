@@ -47,5 +47,6 @@ class Payroll(models.Model):
     bank_name = models.CharField(max_length=120, blank=False)
     account_no = models.CharField(max_length=32, blank=False)
     created_date = models.DateTimeField(default=now)
+    # total_salary = models
     def __str__(self):
         return self.payroll_employee.employee_name

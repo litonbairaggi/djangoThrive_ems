@@ -3,12 +3,17 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
+# from . import views
 
 from .views import (
-    createTeam,
-    showTeam,
-    editTeam,
-    updateTeam,
+    registerPage,
+    loginPage,
+    logoutUser,
+
+    TeamCreateView,
+    TeamListView,
+    TeamEditView,
+    
     destroy,
 
     createDesignation,
@@ -33,12 +38,20 @@ from .views import (
     destroyPayroll,
 )
 
+app_name="ems"
 urlpatterns = [
-    path('create_team/', createTeam, name='create_team'),
-    path('show_team/', showTeam, name='show_team'),
-    path('edit_team/<int:id>/', editTeam, name='edit_team'),
-    path('update_team/<int:id>/', updateTeam, name='update_team'),
+
+    path('register/', registerPage, name='register'),
+	path('login/', loginPage, name='login'),  
+	path('logout/', logoutUser, name="logout"),
+
+    path('create_team/', TeamCreateView.as_view(), name='create_team'),
+    path('show_team/', TeamListView.as_view(), name='show_team'),
+    path('update_team/<int:pk>/', TeamEditView.as_view(), name='update_team'),
+
     path('delete_team/<int:id>/', destroy, name='delete_team'),
+
+
 
     path('create_designation/', createDesignation, name='create_designation'),
     path('show_designation/', showDesignation, name='show_designation'),
