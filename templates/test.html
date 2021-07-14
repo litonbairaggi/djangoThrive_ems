@@ -1,188 +1,44 @@
-		<div class="container-fluid-full">
-		<div class="row-fluid">
-					
-			<div class="row-fluid">
-				<div class="login-box">
-					<div class="icons">
-						<a href="index.html"><i class="halflings-icon home"></i></a>
-						<a href="#"><i class="halflings-icon cog"></i></a>
-					</div>
-					<h2>Login to your account</h2>
-					<form class="form-horizontal" action="http://bootstrapmaster.com/live/metro/index.html" method="post">
-						<fieldset>
-							
-							<div class="input-prepend" title="Username">
-								<span class="add-on"><i class="halflings-icon user"></i></span>
-								<input class="input-large span10" name="username" id="username" type="text" placeholder="type username"/>
-							</div>
-							<div class="clearfix"></div>
+class BinLocation(models.Model):
+    bin_code = models.CharField(max_length=10, unique=True)
+    desc = models.CharField(max_length=50)
 
-							<div class="input-prepend" title="Password">
-								<span class="add-on"><i class="halflings-icon lock"></i></span>
-								<input class="input-large span10" name="password" id="password" type="password" placeholder="type password"/>
-							</div>
-							<div class="clearfix"></div>
-							
-							<label class="remember" for="remember"><input type="checkbox" id="remember" />Remember me</label>
+    def __str__(self):
+        return f"{self.bin_code}"
 
-							<div class="button-login">	
-								<button type="submit" class="btn btn-primary">Login</button>
-							</div>
-							<div class="clearfix"></div>
-					</form>
-					<hr>
-					<h3>Forgot Password?</h3>
-					<p>
-						No problem, <a href="#">click here</a> to get a new password.
-					</p>	
-				</div><!--/span-->
-			</div><!--/row-->
-			
-
-	</div><!--/.fluid-container-->
-	
-		</div><!--/fluid-row-->
+    class Meta:
+        indexes = [models.Index(fields=['bin_code'])]
 
 
+class ItemMaster(models.Model):
+    item_code = models.CharField(max_length=20, unique=True)
+    desc = models.CharField(max_length=50)
+    long_desc = models.CharField(max_length=150, blank=True)
+    helper_qty = models.DecimalField(max_digits=10, decimal_places=4)
+    unit = models.CharField(max_length=10, blank=False)
 
-<div class="login-form">
-    <form action="/ems/login/" method="POST">
-    {% csrf_token %}
-        <h2 class="text-center">Log in</h2>       
-        <div class="form-group">
-            <input type="text" class="form-control" name="username" placeholder="Username" required="required">
-        </div>
+    def __str__(self):
+        return f"{self.item_code}"
 
-        <div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
-        </div>
-
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block">Log in</button>
-        </div>
-        {% for message in messages %}
-			<p id="messages">{{message}}</p>
-		{% endfor %}
-
-        <div class="clearfix">
-            <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
-            <a href="#" class="float-right">Forgot Password?</a>
-        </div>   
-
-    </form>
-    <p class="text-center"><a href="/ems/register/">Create an Account</a></p>
-</div>
+    class Meta:
+        verbose_name = "Item"
+        verbose_name_plural = "Items"
+        indexes = [models.Index(fields=['item_code'])]
 
 
+class ItemTransaction(models.Model):
+    trace_code = models.CharField(max_length=20, unique=False)
+    item_code = models.ForeignKey(
+        ItemMaster, related_name='trans', on_delete=models.CASCADE, null=False)
+    datetime = models.DateTimeField(auto_now=False, auto_now_add=False)
+    qty = models.DecimalField(max_digits=10, decimal_places=4)
+    unit = models.CharField(max_length=10, blank=False)
+    action = models.CharField(
+        max_length=1, choices=ACTION, blank=False, null=False)
+    in_bin = models.ForeignKey(
+        BinLocation, related_name='in_logs', db_column='bin_code_id', on_delete=models.CASCADE, null=False)
+    out_bin = models.ForeignKey(
+        BinLocation, related_name='out_logs', db_column='bin_code_id', on_delete=models.CASCADE, null=False)
+    remarks = models.TextField(blank=True)
 
-# Team crud
-@login_required(login_url='/ems/login/')
-def createTeam(request):
-    if request.method == "POST":
-        form = TeamForm(request.POST)
-        if form.is_valid():
-            try:
-                form.save()
-                return redirect(('/ems/show_team'))
-            except:
-                pass
-
-    else:
-        form = TeamForm()   
-    context = {
-        'form': form
-    }    
-    return render(request, 'ems/create_team.html', context)    
-
-@login_required(login_url='/ems/login/')
-def showTeam(request):
-    teams = Team.objects.all()
-    context = {
-        'teams': teams
-    } 
-    return render(request, 'ems/show_team.html', context)
-
-
-@login_required(login_url='/ems/login/')
-def editTeam(request, id):
-    teams = Team.objects.get(id=id)
-    context = {
-        'teams': teams
-    }
-    return render(request,'ems/edit_team.html', context)
-
-@login_required(login_url='/ems/login/')
-def updateTeam(request, id):
-    teams = Team.objects.get(id=id)
-    form = TeamForm(request.POST, instance=teams)
-    if form.is_valid():
-        form.save()
-        return redirect("/ems/show_team/")
-    context = {
-        'teams': teams
-    }    
-    return render(request, 'ems/edit_team.html', context) 
-
-@login_required(login_url='/ems/login/')
-def destroy(request, id):
-    teams = Team.objects.get(id=id)
-    teams.delete()
-    return redirect("/ems/show_team")
-
-
-
-
-
-
-
-
-    # path('create_designation/', DesignationCreateView.as_view(), name='create_designation'),
-    # path('show_designation/', DesignationListView.as_view(), name='show_designation'),
-    # path('update_designation/<int:pk>/', DesignationEditView.as_view(), name='update_designation'),
-    # path('delete_designation/<int:id>/', destroyDesignation, name='delete_designation'),
-
-
-	createEmployee,
-    showEmployee,
-    editEmployee,
-    updateEmployee,
-    destroyEmployee,
-
-
-
-
-# Designation views    
-@login_required(login_url='/ems/login/')
-class DesignationCreateView(CreateView):
-    model = Designation 
-    form_class = DesignationForm 
-    template_name = 'ems/create_designation.html'
-    def form_invalid(self, form):
-        form.instance.user = self.request.user
-        return super().form_invalid(form)
-    def get_success_url(self):
-        return reverse_lazy('ems:create_designation')
-
-@login_required(login_url='/ems/login/')
-class DesignationListView(ListView):
-    model = Designation 
-    template_name = 'ems/show_designation.html'
-    context_object_name = 'designations'
-
-@login_required(login_url='/ems/login/')
-class DesignationEditView(UpdateView):
-    model = Designation 
-    form_class = DesignationForm
-    template_name = 'ems/edit_designation.html'
-    def get_success_url(self):
-        id = self.object.id
-        return reverse_lazy('ems:update_designation', kwargs={'pk':id})
-
-@login_required(login_url='/ems/login/')
-def destroyDesignation(request, id):
-    designations = Designation.objects.get(id=id)
-    designations.delete()
-    return redirect("/ems/show_designation")
-
-
-
+    def __str__(self):
+        return f"{self.trace_code} {self.datetime} {self.item_code} {dict(ACTION)[self.action]} {self.qty} {self.unit} {self.in_bin} {self.out_bin}"

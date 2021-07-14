@@ -10,4 +10,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', dashboard, name='dashboard'),
     path('ems/', include('ems.urls')),
+    path('session/', include('session.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

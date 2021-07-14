@@ -10,12 +10,7 @@
 	<ul class="breadcrumb">
 		<li>
 			<i class="icon-home"></i>
-			<a href="index.html">Home</a>
-			<i class="icon-angle-right"></i>
-		</li>
-		<li>
-			<i class="icon-edit"></i>
-			<a href="#">Attendance</a>
+			<a href="{% url 'dashboard' %}">Home</a>
 		</li> 
 	</ul>
 	<div class="row-fluid sortable">
@@ -35,7 +30,7 @@
 			</div>
 			<div class="box-content">
 				<form method="POST" class="form-horizontal">
-				{% csrf_token %} 
+				{% csrf_token %}
 				{{form | crispy}}
 						<div class="form-actions">
 							<button type="submit" class="btn btn-primary">Save changes</button>

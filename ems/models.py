@@ -31,22 +31,31 @@ class Employee(models.Model):
     salary = models.PositiveIntegerField(default=0)
     created_date = models.DateTimeField(default=now)
 
+
+    # def __str__(self):
+    #     return '{}{}'.format(self.employee_name, self.salary)
+
     def __str__(self):
-        return self.employee_name
+        return self.employee_name 
 
 class Attendance(models.Model):
+    ATTENDANCE=(
+        ('present ','present '),
+        ('absent','absent'),
+    )
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, blank=False)
-    created_entry = models.DateTimeField(default=now)
-    created_exit = models.DateTimeField(default=now)
+    attendance = models.CharField(max_length=100, choices=ATTENDANCE) 
+    created_date = models.DateTimeField(default=now)
 
     def __str__(self):
         return self.employee.employee_name
 
 class Payroll(models.Model):
-    payroll_employee = models.ForeignKey(Employee, on_delete=models.CASCADE, blank=False)
+    payroll_employee = models.ForeignKey(Employee, related_name='payroll_employee', on_delete=models.CASCADE, blank=False)
     bank_name = models.CharField(max_length=120, blank=False)
     account_no = models.CharField(max_length=32, blank=False)
+    employeeSalary = models.ForeignKey(Employee, related_name='employeeSalary', on_delete=models.CASCADE, blank=False)
     created_date = models.DateTimeField(default=now)
     # total_salary = models
     def __str__(self):
-        return self.payroll_employee.employee_name
+        return self.employeeSalary

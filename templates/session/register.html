@@ -103,9 +103,9 @@ body {
 </head>
 <body>
 <div class="signup-form">
-    <form action="/ems/register/" method="POST">
+    <form action="/session/registration/" method="POST">
     {% csrf_token %}
-		<h2>Register</h2>
+		<h2>Thrive</h2>
 		<p class="hint-text">Create your account. It's free and only takes a minute.</p>
 
         <div class="form-group">
@@ -138,7 +138,7 @@ body {
     </form>
     {{form.errors}}
 	<div class="text-center">Already have an account? 
-        <a href="/ems/login/">Sign in</a>
+        <a href="/session/login/">Sign in</a>
     </div>
 </div>
 </body>

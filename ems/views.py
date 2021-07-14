@@ -5,63 +5,19 @@ from django.urls import reverse_lazy
 from django.views import View
 
 from . models import Employee, Team, Designation, Employee, Attendance, Payroll
-from . froms import TeamForm, DesignationForm, EmployeeForm, AttendanceForm, PayrollForm, CreateUserForm
+from . froms import TeamForm, DesignationForm, EmployeeForm, AttendanceForm, PayrollForm
 
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .decorators import unauthenticated_user
+
 
 from django.views.generic import (
     ListView,
     CreateView,
     UpdateView,
-    DeleteView,
-
 )
 # Create your views here.
 
-@unauthenticated_user
-def registerPage(request):
-  
-    form = CreateUserForm()
-    if request.method == "POST":
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Account was created for '+user)
-            return redirect('ems/login/')
-    context = {
-        'form':form
-    }
-    return render(request, 'ems/register.html', context)
-
-@unauthenticated_user
-def loginPage(request):   
-    if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
-            login(request, user)
-            return redirect('/ems/show_employee/')
-        else:
-            messages.info(request, 'Username OR password is incorrect') 
-
-    context = {}
-    return render(request, 'ems/login.html', context)
-
-
-def logoutUser(request):
-	logout(request)
-	return redirect('/ems/login/')
-
-
-# Team views    
-
+# @login_required(login_url='login')
 class TeamCreateView(CreateView):
     model = Team 
     form_class = TeamForm 
@@ -72,13 +28,14 @@ class TeamCreateView(CreateView):
     def get_success_url(self):
         return reverse_lazy('ems:create_team')
 
-
+# @login_required(login_url='login')
 class TeamListView(ListView):
     model = Team 
     template_name = 'ems/show_team.html'
     context_object_name = 'teams'
 
 
+# @login_required(login_url='login')
 class TeamEditView(UpdateView):
     model = Team 
     form_class = TeamForm
@@ -87,7 +44,7 @@ class TeamEditView(UpdateView):
         id = self.object.id
         return reverse_lazy('ems:show_team')
 
-
+@login_required(login_url='/session/login')
 def destroy(request, id):
     teams = Team.objects.get(id=id)
     teams.delete()
@@ -96,6 +53,7 @@ def destroy(request, id):
 
 
 # Designation CRUD
+# @login_required(login_url='login')
 class DesignationCreateView(CreateView):
     model = Designation 
     form_class = DesignationForm 
@@ -107,13 +65,14 @@ class DesignationCreateView(CreateView):
         return reverse_lazy('ems:create_designation')
 
 
-
+# @login_required(login_url='login')
 class DesignationListView(ListView):
     model = Designation 
     template_name = 'ems/show_designation.html'
     context_object_name = 'designations'
 
 
+# @login_required(login_url='login')
 class DesignationEditView(UpdateView):
     model = Designation 
     form_class = DesignationForm
@@ -122,6 +81,7 @@ class DesignationEditView(UpdateView):
         return reverse_lazy('ems:show_designation')
 
 
+# @login_required(login_url='login')
 def destroyDesignation(request, id):
     designations = Designation.objects.get(id=id)
     designations.delete()
@@ -131,6 +91,7 @@ def destroyDesignation(request, id):
 
 
 # Employee CRUD
+# @login_required(login_url='login')
 class EmployeeCreateView(CreateView):
     model = Employee 
     form_class = EmployeeForm 
@@ -141,11 +102,13 @@ class EmployeeCreateView(CreateView):
     def get_success_url(self):
         return reverse_lazy('ems:create_employee')
 
+# @login_required(login_url='login')
 class EmployeeListView(ListView):
     model = Employee 
     template_name = 'ems/show_employee.html'
     context_object_name = 'employees'
 
+# @login_required(login_url='login')
 class EmployeeEditView(UpdateView):
     model = Employee 
     form_class = EmployeeForm
@@ -153,12 +116,14 @@ class EmployeeEditView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('ems:show_employee')
 
+# @login_required(login_url='login')
 def destroyEmployee(request, id):
     employees = Employee.objects.get(id=id)
     employees.delete()
     return redirect("/ems/show_employee")
 
 # Attendance CRUD
+# @login_required(login_url='login')
 class AttendanceCreateView(CreateView):
     model = Attendance 
     form_class = AttendanceForm 
@@ -169,6 +134,7 @@ class AttendanceCreateView(CreateView):
     def get_success_url(self):
         return reverse_lazy('ems:create_attendance')
 
+# @login_required(login_url='login')
 class AttendanceListView(ListView):
     model = Attendance 
     template_name = 'ems/show_attendance.html'
@@ -176,6 +142,7 @@ class AttendanceListView(ListView):
 
 
 # Payroll CRUD
+# @login_required(login_url='login')
 class PayrollCreateView(CreateView):
     model = Payroll 
     form_class = PayrollForm 
@@ -186,11 +153,13 @@ class PayrollCreateView(CreateView):
     def get_success_url(self):
         return reverse_lazy('ems:create_payroll')
 
+# @login_required(login_url='login')
 class PayrollListView(ListView):
     model = Payroll 
     template_name = 'ems/show_payroll.html'
     context_object_name = 'payrolls'
 
+# @login_required(login_url='login')
 class PayrollEditView(UpdateView):
     model = Payroll 
     form_class = PayrollForm
@@ -198,7 +167,7 @@ class PayrollEditView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('ems:show_payroll')
 
-@login_required(login_url='/ems/login/')
+# @login_required(login_url='login')
 def destroyPayroll(request, id):
     payrolls = Payroll.objects.get(id=id)
     payrolls.delete()

@@ -2,15 +2,8 @@ from django import forms
 from django.db import models
 from django.db.models.base import Model
 from django.forms import fields, widgets
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from . models import Team, Designation, Employee, Attendance, Payroll
 
-
-class CreateUserForm(UserCreationForm):
-	class Meta:
-		model = User
-		fields = ['username', 'email', 'password1', 'password2']  
 
 class TeamForm(forms.ModelForm):  
     class Meta:  
@@ -60,21 +53,22 @@ class EmployeeForm(forms.ModelForm):
 class AttendanceForm(forms.ModelForm):
     class Meta:
         model = Attendance
-        fields = ['id', 'employee', 'created_entry', 'created_exit']
+        fields = ['id', 'employee', 'attendance']
         widgets = {
             'employee':forms.Select(attrs={'class':'form-control'}),
-            'created_entry':forms.DateTimeInput(attrs={'type': 'datetime-local', 'class':'form-control'}),
-            'created_exit':forms.DateTimeInput(attrs={'type': 'datetime-local', 'class':'form-control'}),
+            'attendance':forms.Select(attrs={'class':'form-control'}),
+
         }
 
 class PayrollForm(forms.ModelForm):
     class Meta:
         model = Payroll
-        fields = ['id', 'payroll_employee', 'bank_name', 'account_no']
+        fields = ['id', 'payroll_employee', 'bank_name', 'account_no', 'employeeSalary']
         widgets = {
             'payroll_employee':forms.Select(attrs={'class':'form-control'}),
             'bank_name':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Bank Name'}),
             'account_no':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Account No'}),
+            'employeeSalary':forms.Select(attrs={'class':'form-control', 'placeholder':'Salary'}),
         }
 
 

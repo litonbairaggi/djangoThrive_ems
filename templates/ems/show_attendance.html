@@ -7,10 +7,8 @@
    <ul class="breadcrumb">
       <li>
          <i class="icon-home"></i>
-         <a href="index.html">Home</a> 
-         <i class="icon-angle-right"></i>
-      </li>
-      <li><a href="#">Tables</a></li>         
+         <a href="{% url 'dashboard' %}">Home</a> 
+      </li>        
    </ul>
    <div class="row-fluid sortable">
       <div class="box span12">
@@ -30,20 +28,19 @@
                   <tr>
                      <th>ID</th>
                      <th>Employee Name</th>
-                     <th>Entry Date</th>
-                     <th>Exit Date</th>
+                     <th>Status</th>
                   </tr>
                </thead>
 
 
                <tbody>
-                {% for attendance in attendances %}
+                {% for attendanc in attendances %}
                     <tr>
-                        <td>{{ attendance.id }}</td>
-                        <td>{{ attendance.employee }}</td>                    
-                        <td>{{ attendance.created_entry }}</td>                    
-                        <td>{{ attendance.created_exit }}</td>      
-
+                        <td>{{ attendanc.id }}</td>
+                        <td>{{ attendanc.employee }}</td>                     
+                        <td class="center">
+                           <span class="label label-success">{{ attendanc.attendance }}</span>
+                        </td>   
                     </tr>
                 {% endfor %}
 

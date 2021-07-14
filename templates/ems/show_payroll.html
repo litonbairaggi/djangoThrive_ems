@@ -7,10 +7,8 @@
    <ul class="breadcrumb">
       <li>
          <i class="icon-home"></i>
-         <a href="index.html">Home</a> 
-         <i class="icon-angle-right"></i>
-      </li>
-      <li><a href="#">Tables</a></li>         
+         <a href="{% url 'dashboard' %}">Home</a>
+      </li>         
    </ul>
    <div class="row-fluid sortable">
       <div class="box span12">
@@ -32,7 +30,7 @@
                      <th>Employee Name</th>
                      <th>Bank Name</th>
                      <th>Account No</th>
-                     <th>Status</th>
+                     <th>Salary</th>
                      <th>Actions</th>
                   </tr>
                </thead>
@@ -44,11 +42,9 @@
                         <td>{{ payroll.id }}</td>
                         <td>{{ payroll.payroll_employee }}</td>                    
                         <td>{{ payroll.bank_name }}</td>                    
+                        <td>{{ payroll.employeeSalary }}</td>                    
                         <td>{{ payroll.account_no }}</td>                    
 
-                     <td class="center">
-                        <span class="label label-success">Active</span>
-                     </td>
                      <td class="center">
                         <a class="btn btn-info" href="/ems/update_payroll/{{payroll.pk}}/">
                         <i class="halflings-icon white edit"></i>  

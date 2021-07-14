@@ -7,10 +7,9 @@
    <ul class="breadcrumb">
       <li>
          <i class="icon-home"></i>
-         <a href="index.html">Home</a> 
-         <i class="icon-angle-right"></i>
+         <a href="{% url 'dashboard' %}">Home</a>
       </li>
-      <li><a href="#">Tables</a></li>         
+        
    </ul>
    <div class="row-fluid sortable">
       <div class="box span12">
@@ -30,7 +29,6 @@
                   <tr>
                      <th>ID</th>
                      <th>Name</th>
-                     <th>Status</th>
                      <th>Actions</th>
                   </tr>
                </thead>
@@ -42,9 +40,6 @@
                         <td>{{ designation.id }}</td>
                         <td>{{ designation.designation_name }}</td>                    
 
-                     <td class="center">
-                        <span class="label label-success">Active</span>
-                     </td>
                      <td class="center">
                         <a class="btn btn-info" href="/ems/update_designation/{{designation.pk}}/">
                         <i class="halflings-icon white edit"></i>  
