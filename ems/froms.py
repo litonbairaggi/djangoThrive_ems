@@ -57,18 +57,16 @@ class AttendanceForm(forms.ModelForm):
         widgets = {
             'employee':forms.Select(attrs={'class':'form-control'}),
             'attendance':forms.Select(attrs={'class':'form-control'}),
-
         }
 
 class PayrollForm(forms.ModelForm):
     class Meta:
         model = Payroll
-        fields = ['id', 'payroll_employee', 'bank_name', 'account_no', 'employeeSalary']
+        fields = ['id', 'payroll_employee', 'bank_name', 'account_no']
         widgets = {
             'payroll_employee':forms.Select(attrs={'class':'form-control'}),
             'bank_name':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Bank Name'}),
             'account_no':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Account No'}),
-            'employeeSalary':forms.Select(attrs={'class':'form-control', 'placeholder':'Salary'}),
         }
 
 

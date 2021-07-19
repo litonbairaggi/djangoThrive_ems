@@ -28,9 +28,8 @@ class Employee(models.Model):
     employee_phone = models.CharField(max_length=32, unique=True, blank=False)
     gender = models.CharField(max_length=100, choices=GENDER) 
     address = models.CharField(max_length=120, blank=True)
-    salary = models.PositiveIntegerField(default=0)
+    salary = models.FloatField(default=0)
     created_date = models.DateTimeField(default=now)
-
 
     # def __str__(self):
     #     return '{}{}'.format(self.employee_name, self.salary)
@@ -38,14 +37,18 @@ class Employee(models.Model):
     def __str__(self):
         return self.employee_name 
 
+    # def __float__(self):
+    #     return 500.0
+        
+
 class Attendance(models.Model):
     ATTENDANCE=(
-        ('present ','present '),
-        ('absent','absent'),
+        ('Present ','present '),
+        ('Absent','absent'),
     )
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, blank=False)
-    attendance = models.CharField(max_length=100, choices=ATTENDANCE) 
-    created_date = models.DateTimeField(default=now)
+    attendance = models.CharField(max_length=100, choices=ATTENDANCE)
+    created_date = models.DateTimeField(default=now) 
 
     def __str__(self):
         return self.employee.employee_name
@@ -54,8 +57,7 @@ class Payroll(models.Model):
     payroll_employee = models.ForeignKey(Employee, related_name='payroll_employee', on_delete=models.CASCADE, blank=False)
     bank_name = models.CharField(max_length=120, blank=False)
     account_no = models.CharField(max_length=32, blank=False)
-    employeeSalary = models.ForeignKey(Employee, related_name='employeeSalary', on_delete=models.CASCADE, blank=False)
     created_date = models.DateTimeField(default=now)
-    # total_salary = models
-    def __str__(self):
-        return self.employeeSalary
+
+    
+

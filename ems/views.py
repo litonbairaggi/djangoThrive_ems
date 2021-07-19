@@ -26,7 +26,7 @@ class TeamCreateView(CreateView):
         form.instance.user = self.request.user
         return super().form_invalid(form)
     def get_success_url(self):
-        return reverse_lazy('ems:create_team')
+        return reverse_lazy('ems:show_team')
 
 # @login_required(login_url='login')
 class TeamListView(ListView):
@@ -62,7 +62,7 @@ class DesignationCreateView(CreateView):
         form.instance.user = self.request.user
         return super().form_invalid(form)
     def get_success_url(self):
-        return reverse_lazy('ems:create_designation')
+        return reverse_lazy('ems:show_designation')
 
 
 # @login_required(login_url='login')
@@ -100,7 +100,7 @@ class EmployeeCreateView(CreateView):
         form.instance.user = self.request.user
         return super().form_invalid(form)
     def get_success_url(self):
-        return reverse_lazy('ems:create_employee')
+        return reverse_lazy('ems:show_employee')
 
 # @login_required(login_url='login')
 class EmployeeListView(ListView):
@@ -158,6 +158,7 @@ class PayrollListView(ListView):
     model = Payroll 
     template_name = 'ems/show_payroll.html'
     context_object_name = 'payrolls'
+    # print({context_object_name})
 
 # @login_required(login_url='login')
 class PayrollEditView(UpdateView):

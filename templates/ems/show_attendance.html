@@ -32,15 +32,15 @@
                   </tr>
                </thead>
 
-
                <tbody>
                 {% for attendanc in attendances %}
                     <tr>
                         <td>{{ attendanc.id }}</td>
-                        <td>{{ attendanc.employee }}</td>                     
+                        <td>{{ attendanc.employee }}</td>                                             
                         <td class="center">
                            <span class="label label-success">{{ attendanc.attendance }}</span>
-                        </td>   
+                        </td>
+ 
                     </tr>
                 {% endfor %}
 

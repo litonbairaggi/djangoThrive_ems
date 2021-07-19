@@ -48,19 +48,7 @@ def registrationPage(request):
         form=SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('session:login')            # user=form.save()
-            # current_site=get_current_site(request)
-            # mail_subject='An account Created'
-            # message=render_to_string('session/account.html', {
-            #     'user':user,
-            #     'domain': current_site.domain
-            # })
-            # send_mail=form.cleaned_data.get('email')
-            # email=EmailMessage(mail_subject,message, to=[send_mail])
-            # email.send()
-            # messages.success(request, 'Successfully created account')
-
-            # return redirect('login')
+            return redirect('session:login')
     else:
         form=SignUpForm()
     return render(request, 'session/register.html', {'form': form})  
@@ -80,4 +68,5 @@ def change_password(request):
     context = {
         'form':form
     }    
-    return render(request, 'session/change_password.html', context)  
+    return render(request, 'session/change_password.html', context) 
+
