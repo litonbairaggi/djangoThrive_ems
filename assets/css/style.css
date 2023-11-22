@@ -2996,6 +2996,33 @@ a.btn.btn-primary.teamlist {
     padding: 5px 15px;
     margin-top: -8px;
 }
+form.form-horizontal input {
+    padding: 10px;
+    min-width: 300px;
+    margin-bottom: 10px;
+}
+form.form-horizontal select {
+    height: 40px;
+    min-width: 320px;
+    margin-bottom: 10px;
+	outline: 0;
+}
+form.form-horizontal {
+    padding: 15px;
+}
+form.form-horizontal label {
+    font-weight: bold;
+}
+.form-horizontal .form-actions {
+    padding-left: 15px !important;
+}
+.form-actions {
+    padding: 7px 20px 7px !important;
+}
+
+
+
+
 
 
 

@@ -35,6 +35,7 @@
                      <th>Gender</th>
                      <th>Employee Address</th>
                      <th>Salary</th>
+                     <th class="employee_img">Image</th>
                      <th>Actions</th>
                   </tr>
                </thead>
@@ -52,6 +53,9 @@
                         <td>{{ employee.gender }}</td>                    
                         <td>{{ employee.address }}</td>                    
                         <td>{{ employee.salary }}</td>                                   
+                        <td class="employee_img">
+                           <img class="employee_img" src="{{ employee.employee_img }}" alt="{{ employee.employee_name }}" height="100px" width="100px">
+                        </td>                                   
 
                      <td class="center">
                         <a class="btn btn-info" href="/ems/update_employee/{{employee.pk}}/">

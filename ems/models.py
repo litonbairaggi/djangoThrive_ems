@@ -1,9 +1,9 @@
 from django.db import models
 from django.db.models.fields import CharField
 from django.utils.timezone import now
+from django.utils.html import mark_safe
 
 # Create your models here.
-
 class Team(models.Model):
     team_name = models.CharField(max_length=120, unique=True, blank=False)
     def __str__(self):
@@ -29,6 +29,7 @@ class Employee(models.Model):
     gender = models.CharField(max_length=100, choices=GENDER) 
     address = models.CharField(max_length=120, blank=True)
     salary = models.FloatField(default=0)
+    employee_img = models.ImageField(upload_to='employee_img/', blank=False)
     created_date = models.DateTimeField(default=now)
 
     # def __str__(self):
@@ -59,5 +60,5 @@ class Payroll(models.Model):
     account_no = models.CharField(max_length=32, blank=False)
     created_date = models.DateTimeField(default=now)
 
-    
-
+    # def __str__(self):
+    #     return self.payroll_employee + ' ' + self.start

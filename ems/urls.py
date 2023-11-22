@@ -34,7 +34,7 @@ from .views import (
 
 app_name="ems"
 urlpatterns = [
-    
+
     path('create_team/', TeamCreateView.as_view(), name='create_team'),
     path('show_team/', TeamListView.as_view(), name='show_team'),
     path('update_team/<int:pk>/', TeamEditView.as_view(), name='update_team'),
@@ -53,7 +53,7 @@ urlpatterns = [
 
     path('create_attendance/', AttendanceCreateView.as_view(), name='create_attendance'),
     path('show_attendance/', AttendanceListView.as_view(), name='show_attendance'),
-    
+
     path('create_payroll/', PayrollCreateView.as_view(), name='create_payroll'),
     path('show_payroll/', PayrollListView.as_view(), name='show_payroll'),
     path('update_payroll/<int:pk>/', PayrollEditView.as_view(), name='update_payroll'),

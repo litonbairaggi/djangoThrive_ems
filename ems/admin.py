@@ -5,6 +5,9 @@ from . models import Team, Designation, Employee, Attendance, Payroll
 
 admin.site.register(Team)
 admin.site.register(Designation)
-admin.site.register(Employee)
 admin.site.register(Attendance)
 admin.site.register(Payroll)
+
+@admin.register(Employee)
+class EmployeeAdmin(admin.ModelAdmin):
+    list_display = ['id', 'employee_name', 'employee_email', 'team', 'designation', 'employee_img', 'address']

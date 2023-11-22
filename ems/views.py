@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views import View
 
 from . models import Employee, Team, Designation, Employee, Attendance, Payroll
-from . froms import TeamForm, DesignationForm, EmployeeForm, AttendanceForm, PayrollForm
+from .forms import TeamForm, DesignationForm, EmployeeForm, AttendanceForm, PayrollForm
 
 from django.contrib.auth.decorators import login_required
 
